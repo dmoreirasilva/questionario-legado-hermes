@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Perfil Comportamental — O Legado de Hermes</title>
-  <meta name="description" content="Mapeie seu perfil comportamental completo: DISC, Jung, Spranger, Liderança, Mapa da Transmutação e Crenças de Identidade.">
+  <meta name="description" content="Mapeie seu perfil comportamental completo: DISC, Jung, Spranger, Liderança, Reprogramação Mental & Alquimia Espiritual e Crenças de Identidade.">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <style>
     :root {
       --primary:   #2C2318;
@@ -321,6 +322,33 @@
       .sp-track        { width:70px; }
       .btn-accent, .btn-primary { width:100%; justify-content:center; }
     }
+
+    /* ── Lead form ── */
+    .lead-form { margin-bottom:28px; }
+    .lead-form label { display:block; font-size:.82rem; font-weight:600; color:var(--primary); margin-bottom:6px; }
+    .lead-form input {
+      width:100%; padding:12px 14px;
+      background:var(--white); border:1px solid var(--line);
+      border-radius:var(--r-soft); font-family:'Inter',sans-serif;
+      font-size:.9rem; color:var(--text); outline:none;
+      transition:border-color .18s;
+    }
+    .lead-form input:focus { border-color:var(--accent); }
+    .lead-form input::placeholder { color:var(--muted); }
+    .lead-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    @media(max-width:500px){ .lead-row { grid-template-columns:1fr; } }
+    .lead-error { font-size:.78rem; color:var(--purple); margin-top:6px; display:none; }
+
+    /* ── Email status toast ── */
+    .email-toast {
+      position:fixed; bottom:24px; right:24px;
+      background:var(--primary); color:#fff;
+      padding:12px 20px; border-radius:var(--r-card);
+      font-size:.82rem; opacity:0; transform:translateY(8px);
+      transition:opacity .3s, transform .3s; pointer-events:none;
+      max-width:280px; line-height:1.5; z-index:999;
+    }
+    .email-toast.show { opacity:1; transform:translateY(0); }
   </style>
 </head>
 <body>
@@ -347,8 +375,22 @@
       <div class="badge"><span class="badge-dot"></span> Mapeamento Comportamental Completo</div>
       <h1 class="intro-title">Descubra seu<br><em>Perfil de Transmutação</em></h1>
       <p class="intro-lead">
-        Um diagnóstico profundo em 6 dimensões — DISC, Jung, Spranger, Estilos de Liderança, Mapa da Transmutação exclusivo e Crenças de Identidade. Leva cerca de <strong>15 minutos</strong>. Resultados instantâneos.
+        Um diagnóstico profundo em 6 dimensões — DISC, Jung, Spranger, Estilos de Liderança, Reprogramação Mental & Alquimia Espiritual e Crenças de Identidade. Leva cerca de <strong>15 minutos</strong>. Resultados instantâneos.
       </p>
+    </div>
+
+    <div class="lead-form">
+      <div class="lead-row">
+        <div>
+          <label for="leadName">Seu nome</label>
+          <input type="text" id="leadName" placeholder="Como te chamamos?" autocomplete="given-name">
+        </div>
+        <div>
+          <label for="leadWhatsApp">WhatsApp</label>
+          <input type="tel" id="leadWhatsApp" placeholder="(11) 99999-9999" autocomplete="tel">
+        </div>
+      </div>
+      <div class="lead-error" id="leadError">Por favor, preencha seu nome antes de continuar.</div>
     </div>
 
     <div class="intro-grid">
@@ -412,6 +454,9 @@
   </div>
 </div>
 
+<!-- EMAIL TOAST -->
+<div class="email-toast" id="emailToast"></div>
+
 <!-- RESULTS -->
 <div id="screen-results" class="screen">
   <div class="results-hero">
@@ -427,6 +472,19 @@
 </div>
 
 <script>
+// ════════════════════════════════
+// EMAILJS CONFIG
+// Preencha após criar conta em emailjs.com
+// ════════════════════════════════
+const EJS = {
+  publicKey:  'COLE_AQUI_PUBLIC_KEY',   // Account → API Keys → Public Key
+  serviceId:  'COLE_AQUI_SERVICE_ID',   // Email Services → Service ID
+  templateId: 'COLE_AQUI_TEMPLATE_ID'   // Email Templates → Template ID
+};
+const EMAIL_DESTINO = 'd.moreira.silva2010@gmail.com';
+const EMAIL_ATIVO = !EJS.publicKey.startsWith('COLE');
+if (EMAIL_ATIVO) emailjs.init({ publicKey: EJS.publicKey });
+
 // ════════════════════════════════
 // DATA
 // ════════════════════════════════
@@ -595,6 +653,7 @@ const JUNG_DESC = {
 // ════════════════════════════════
 let state = {
   section: 0,
+  lead: { name: '', whatsapp: '' },
   answers: {
     disc:          new Array(12).fill(null),
     jung:          new Array(16).fill(null),
@@ -615,6 +674,18 @@ function show(id) {
 }
 
 function startQuiz() {
+  const name = document.getElementById('leadName').value.trim();
+  if (!name) {
+    const err = document.getElementById('leadError');
+    err.style.display = 'block';
+    document.getElementById('leadName').focus();
+    return;
+  }
+  document.getElementById('leadError').style.display = 'none';
+  state.lead = {
+    name: name,
+    whatsapp: document.getElementById('leadWhatsApp').value.trim()
+  };
   state.section = 0;
   show('quiz');
   showProgress(true);
@@ -1009,6 +1080,34 @@ function buildResults() {
   `;
 
   window.scrollTo({ top:0, behavior:'smooth' });
+
+  // ── Envio de email ──
+  if (EMAIL_ATIVO) {
+    const lNames = ['Diretivo','Treinador','Apoiador','Delegador'];
+    const templateParams = {
+      to_email:      EMAIL_DESTINO,
+      lead_nome:     state.lead.name || '(não informado)',
+      lead_whatsapp: state.lead.whatsapp || '(não informado)',
+      data:          new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'}),
+      disc_tipo:     `${discPrimary} — ${DISC_INFO[discPrimary].name}`,
+      disc_pcts:     ['D','I','S','C'].map(l => `${l}: ${Math.round(((disc[l]||0)/discTotal)*100)}%`).join(' | '),
+      jung_tipo:     `${jungType} — ${jungDesc.split('—')[0].trim()}`,
+      spranger_top3: spranger.slice(0,3).map((v,i) => `${i+1}° ${v.name} (${v.score}/10)`).join(' · '),
+      lideranca:     leadership.info.name,
+      transmutacao:  `${transmutation.pct}% — ${transmutation.level}`,
+      crencas:       Object.values(beliefs).map(b => `${b.label}: ${b.score}/${b.max}`).join('\n'),
+    };
+    emailjs.send(EJS.serviceId, EJS.templateId, templateParams)
+      .then(() => toast('✓ Resultado enviado para Diego & Aline', 4000))
+      .catch(() => toast('Email não enviado — veja o resultado na tela', 3000));
+  }
+}
+
+function toast(msg, ms) {
+  const t = document.getElementById('emailToast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), ms);
 }
 
 function doShare() {
