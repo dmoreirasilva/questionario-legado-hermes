@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil Comportamental — O Legado de Hermes</title>
+  <meta name="description" content="Mapeie seu perfil comportamental completo: DISC, Jung, Spranger, Liderança, Mapa da Transmutação e Crenças de Identidade.">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary:   #2C2318;
+      --bg:        #FAF8F4;
+      --surface:   #F2EDE3;
+      --deep:      #EAE4D8;
+      --accent:    #B8963E;
+      --accent-lt: #D4B86A;
+      --accent-pale:#F0E8D5;
+      --purple:    #9B8EC4;
+      --purple-lt: #C8C0E0;
+      --purple-pale:#F0EDF8;
+      --text:      #2C2318;
+      --muted:     #8A7E72;
+      --line:      #E0D8CC;
+      --white:     #FFFFFF;
+      --r-soft:    6px;
+      --r-card:    12px;
+      --r-pill:    999px;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1,h2,h3,h4 { font-family: 'Cormorant Garamond', Georgia, serif; }
+    em { font-style: italic; }
+    .container { max-width: 740px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── Header ── */
+    .site-header {
+      background: var(--white);
+      border-bottom: 1px solid var(--line);
+      padding: 16px 0 0;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 1px 12px rgba(44,35,24,0.06);
+    }
+    .header-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-bottom: 16px;
+    }
+    .logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--accent); font-size: 1.05rem; font-weight: 600; line-height: 1.2;
+    }
+    .logo-sub {
+      display: block; font-family: 'Inter', sans-serif;
+      color: var(--muted); font-size: 0.68rem; font-weight: 400;
+      letter-spacing: 1px; text-transform: uppercase; margin-top: 2px;
+    }
+    #headerProgress { font-size: .78rem; color: var(--muted); display: none; }
+    .progress-track { height: 3px; background: var(--surface); }
+    .progress-fill  { height: 100%; background: linear-gradient(90deg, var(--accent), var(--purple)); width: 0; transition: width .5s ease; }
+
+    /* ── Screens ── */
+    .screen { display: none; padding: 52px 0 96px; }
+    .screen.active { display: block; animation: fadeUp .35s ease; }
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(14px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    /* ── Intro ── */
+    .intro-hero {
+      background: linear-gradient(160deg, var(--surface) 0%, var(--accent-pale) 50%, var(--purple-pale) 100%);
+      border-radius: var(--r-card);
+      padding: 36px 32px;
+      margin-bottom: 36px;
+      border: 1px solid var(--line);
+      position: relative;
+      overflow: hidden;
+    }
+    .intro-hero::before {
+      content:'';
+      position:absolute; inset:0;
+      background: radial-gradient(ellipse at 80% 20%, rgba(155,142,196,0.12) 0%, transparent 55%);
+      pointer-events:none;
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--white); border: 1px solid var(--line);
+      padding: 5px 14px; border-radius: var(--r-pill);
+      font-size: .72rem; color: var(--muted); margin-bottom: 20px;
+    }
+    .badge-dot { width:7px; height:7px; background:var(--accent); border-radius:50%; }
+    .intro-title {
+      font-size: clamp(2rem, 5.5vw, 3rem);
+      line-height: 1.15; margin-bottom: 16px; color: var(--primary);
+    }
+    .intro-title em { color: var(--accent); }
+    .intro-lead {
+      font-size: .95rem; color: var(--muted); line-height: 1.75;
+      max-width: 560px; margin-bottom: 28px;
+    }
+    .intro-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(178px, 1fr));
+      gap: 12px; margin-bottom: 32px;
+    }
+    .intro-item {
+      background: var(--white); border: 1px solid var(--line);
+      border-radius: var(--r-card); padding: 16px;
+    }
+    .intro-item-icon { font-size: 1.5rem; margin-bottom: 8px; }
+    .intro-item h4 { font-family:'Inter',sans-serif; font-size:.82rem; font-weight:600; margin-bottom:3px; }
+    .intro-item p  { font-size:.74rem; color:var(--muted); line-height:1.5; }
+    .intro-meta { font-size:.78rem; color:var(--muted); margin-bottom:24px; }
+    .intro-meta span { margin-right:16px; }
+
+    /* ── Buttons ── */
+    .btn-accent {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-lt));
+      color: var(--white); border: none; padding: 14px 32px;
+      border-radius: var(--r-soft); font-family:'Inter',sans-serif;
+      font-size:.92rem; font-weight:600; cursor:pointer; transition:opacity .2s;
+      text-decoration:none;
+    }
+    .btn-accent:hover { opacity:.88; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--primary); color: var(--bg);
+      border: none; padding: 14px 32px;
+      border-radius: var(--r-soft); font-family:'Inter',sans-serif;
+      font-size:.92rem; font-weight:500; cursor:pointer; transition:opacity .2s;
+    }
+    .btn-primary:hover { opacity:.85; }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--text);
+      border: 1px solid var(--line); padding: 12px 24px;
+      border-radius: var(--r-soft); font-family:'Inter',sans-serif;
+      font-size:.85rem; cursor:pointer; transition:border-color .2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); }
+    .btn-outline.light { color:rgba(44,35,24,.7); border-color:var(--line); }
+    .btn-outline.light:hover { border-color:var(--accent); }
+    .btn-row { display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+
+    /* ── Section header ── */
+    .section-eyebrow {
+      font-size:.7rem; text-transform:uppercase; letter-spacing:.15em;
+      color:var(--accent); font-weight:600; margin-bottom:6px;
+    }
+    .section-title { font-size:1.8rem; margin-bottom:10px; color:var(--primary); }
+    .section-desc  { font-size:.88rem; color:var(--muted); line-height:1.65; }
+    .section-header{ margin-bottom:36px; }
+
+    /* ── Questions ── */
+    .q-block   { margin-bottom:28px; }
+    .q-text    { font-size:.92rem; font-weight:500; line-height:1.55; margin-bottom:14px; }
+    .q-num     { color:var(--accent); font-weight:700; }
+    .q-divider { border:none; border-top:1px solid var(--line); margin:24px 0; }
+
+    .options { display:grid; gap:9px; }
+    .opt {
+      background:var(--white); border:2px solid var(--line);
+      border-radius:var(--r-card); padding:13px 16px;
+      cursor:pointer; display:flex; align-items:flex-start; gap:11px;
+      transition:border-color .18s, background .18s; text-align:left;
+    }
+    .opt:hover    { border-color:var(--accent); background:var(--accent-pale); }
+    .opt.selected { border-color:var(--accent); background:var(--accent-pale); }
+    .opt-letter {
+      width:26px; height:26px; border-radius:50%; flex-shrink:0;
+      background:var(--surface); color:var(--muted);
+      display:flex; align-items:center; justify-content:center;
+      font-size:.76rem; font-weight:700; transition:background .18s, color .18s;
+    }
+    .opt.selected .opt-letter { background:var(--accent); color:white; }
+    .opt-text { font-size:.875rem; color:var(--text); line-height:1.5; }
+
+    .likert-q   { font-size:.88rem; font-weight:500; line-height:1.55; margin-bottom:11px; }
+    .likert-dim { font-size:.7rem; color:var(--muted); margin-left:6px; font-weight:400; }
+    .likert-row { display:flex; gap:6px; }
+    .likert-btn {
+      flex:1; height:42px;
+      background:var(--white); border:2px solid var(--line);
+      border-radius:var(--r-soft); cursor:pointer;
+      font-size:.9rem; font-weight:600; color:var(--muted);
+      transition:border-color .18s, background .18s, color .18s;
+    }
+    .likert-btn:hover    { border-color:var(--accent); color:var(--accent); }
+    .likert-btn.selected { background:var(--accent); border-color:var(--accent); color:white; }
+    .likert-labels { display:flex; justify-content:space-between; font-size:.68rem; color:var(--muted); margin-top:5px; }
+
+    /* ── Nav ── */
+    .quiz-nav {
+      display:flex; align-items:center; justify-content:space-between;
+      margin-top:40px; padding-top:24px; border-top:1px solid var(--line);
+    }
+    .quiz-counter { font-size:.8rem; color:var(--muted); }
+    .error-bar {
+      background:var(--purple-pale); border:1px solid var(--purple-lt);
+      color:var(--purple); padding:11px 15px; border-radius:var(--r-soft);
+      font-size:.82rem; margin-top:14px; display:none;
+    }
+
+    /* ── Results hero ── */
+    .results-hero {
+      background: linear-gradient(160deg, var(--surface) 0%, var(--accent-pale) 60%, var(--purple-pale) 100%);
+      padding: 52px 0 44px;
+      margin: -52px 0 44px;
+      border-bottom: 1px solid var(--line);
+    }
+    .results-hero .eyebrow {
+      font-size:.68rem; text-transform:uppercase; letter-spacing:.18em;
+      color:var(--accent); margin-bottom:8px; font-weight:600;
+    }
+    .results-hero h1 { font-size:2.2rem; color:var(--primary); margin-bottom:8px; }
+    .results-hero p  { color:var(--muted); font-size:.88rem; }
+
+    /* ── Result cards ── */
+    .results-stack { display:grid; gap:20px; }
+    .r-card {
+      background:var(--white); border:1px solid var(--line);
+      border-radius:var(--r-card); padding:26px;
+      position:relative; overflow:hidden;
+    }
+    .r-card::before {
+      content:''; position:absolute; top:0; left:0;
+      width:3px; height:100%;
+      background:linear-gradient(180deg, var(--accent), var(--purple));
+    }
+    .r-card-head { display:flex; align-items:center; gap:12px; margin-bottom:22px; }
+    .r-icon  { font-size:1.4rem; }
+    .r-title { font-family:'Cormorant Garamond',serif; font-size:1.15rem; line-height:1.3; color:var(--primary); }
+    .r-sub   { font-size:.72rem; color:var(--muted); margin-top:1px; }
+    .r-tag {
+      margin-left:auto;
+      background:var(--accent-pale); border:1px solid rgba(184,150,62,0.3);
+      padding:4px 12px; border-radius:var(--r-pill);
+      font-size:.72rem; color:var(--accent); font-weight:600; white-space:nowrap;
+    }
+
+    .score-row  { display:grid; gap:11px; margin-bottom:4px; }
+    .score-item { display:grid; grid-template-columns:28px 1fr 38px; align-items:center; gap:10px; }
+    .score-item.wide { grid-template-columns:80px 1fr 38px; }
+    .s-label    { font-weight:700; font-size:.88rem; }
+    .s-label.muted { font-size:.78rem; color:var(--muted); font-weight:500; }
+    .s-track { background:var(--surface); border-radius:var(--r-pill); height:9px; overflow:hidden; }
+    .s-fill  { height:100%; border-radius:var(--r-pill); transition:width 1s ease; }
+    .s-pct   { font-size:.78rem; color:var(--muted); text-align:right; }
+
+    .profile-box {
+      margin-top:14px; padding:14px 16px;
+      background:var(--accent-pale); border-radius:var(--r-soft);
+      border-left:3px solid var(--accent);
+    }
+    .profile-box strong { font-family:'Cormorant Garamond',serif; font-size:1rem; display:block; margin-bottom:4px; }
+    .profile-box p { font-size:.82rem; color:var(--muted); line-height:1.65; }
+
+    .jung-type { font-size:3rem; font-weight:700; color:var(--accent); font-family:'Cormorant Garamond',serif; margin-bottom:2px; letter-spacing:3px; }
+    .jung-name { font-family:'Cormorant Garamond',serif; font-size:1rem; font-style:italic; color:var(--purple); margin-bottom:8px; }
+    .jung-desc { font-size:.85rem; color:var(--muted); line-height:1.65; margin-bottom:16px; }
+    .jung-dims { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .jung-dim  { background:var(--surface); border-radius:var(--r-soft); padding:12px; }
+    .jung-dim-lbl { font-size:.68rem; color:var(--muted); margin-bottom:3px; }
+    .jung-dim-val { font-size:.85rem; font-weight:600; color:var(--primary); }
+
+    .sp-list  { display:grid; gap:10px; }
+    .sp-item  { display:flex; align-items:center; gap:10px; }
+    .sp-rank  { font-weight:700; color:var(--accent); font-size:1rem; width:22px; }
+    .sp-name  { font-size:.875rem; font-weight:500; flex:1; }
+    .sp-track { width:120px; background:var(--surface); height:8px; border-radius:var(--r-pill); }
+    .sp-fill  { height:100%; background:linear-gradient(90deg,var(--accent),var(--purple)); border-radius:var(--r-pill); }
+    .sp-score { font-size:.78rem; color:var(--muted); width:32px; text-align:right; }
+
+    .anx-center  { display:flex; flex-direction:column; align-items:center; gap:4px; margin-bottom:14px; }
+    .anx-num     { font-size:3.2rem; font-weight:700; font-family:'Cormorant Garamond',serif; }
+    .anx-lbl     { font-size:.9rem; color:var(--muted); }
+    .anx-bar-track { height:12px; background:var(--surface); border-radius:var(--r-pill); overflow:hidden; margin-bottom:14px; }
+    .anx-bar-fill  { height:100%; border-radius:var(--r-pill); transition:width 1.2s ease; }
+    .anx-desc    { font-size:.85rem; color:var(--muted); line-height:1.65; text-align:center; }
+
+    .beliefs-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .belief-box   { background:var(--surface); border-radius:var(--r-soft); padding:16px; text-align:center; }
+    .belief-num   { font-size:1.9rem; font-weight:700; font-family:'Cormorant Garamond',serif; color:var(--accent); line-height:1; }
+    .belief-max   { font-size:.88rem; color:var(--muted); }
+    .belief-lbl   { font-size:.74rem; color:var(--muted); margin-top:4px; line-height:1.4; }
+    .belief-warning {
+      margin-top:14px; padding:12px 14px;
+      background:var(--purple-pale); border:1px solid var(--purple-lt);
+      border-radius:var(--r-soft); font-size:.82rem; color:var(--primary); line-height:1.55;
+    }
+
+    .cta-card {
+      background: linear-gradient(160deg, var(--accent-pale) 0%, var(--purple-pale) 100%);
+      border-radius:var(--r-card); padding:40px; text-align:center;
+      border:1px solid var(--line);
+    }
+    .cta-eyebrow { font-size:.68rem; text-transform:uppercase; letter-spacing:.18em; color:var(--accent); margin-bottom:10px; font-weight:600; }
+    .cta-card h2 { font-size:1.75rem; color:var(--primary); margin-bottom:14px; }
+    .cta-card h2 em { color:var(--accent); }
+    .cta-card p  { color:var(--muted); font-size:.88rem; line-height:1.7; margin-bottom:28px; max-width:560px; margin-left:auto; margin-right:auto; }
+    .cta-row { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+
+    @media print {
+      .site-header, .quiz-nav, .cta-card { display:none; }
+      .screen { padding:0; }
+      .r-card { break-inside:avoid; }
+    }
+    @media (max-width:600px) {
+      .intro-grid      { grid-template-columns:1fr 1fr; }
+      .jung-dims       { grid-template-columns:1fr; }
+      .beliefs-grid    { grid-template-columns:1fr; }
+      .cta-row         { flex-direction:column; }
+      .quiz-nav        { flex-direction:column-reverse; gap:12px; }
+      .score-item.wide { grid-template-columns:64px 1fr 36px; }
+      .sp-track        { width:70px; }
+      .btn-accent, .btn-primary { width:100%; justify-content:center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="container">
+    <div class="header-row">
+      <div>
+        <div class="logo-text">O Legado de Hermes<span class="logo-sub">Hipnoterapia · Alquimia · Espiritualidade</span></div>
+      </div>
+      <div id="headerProgress"></div>
+    </div>
+  </div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+</header>
+
+<!-- INTRO -->
+<div id="screen-intro" class="screen active">
+  <div class="container">
+    <div class="intro-hero">
+      <div class="badge"><span class="badge-dot"></span> Mapeamento Comportamental Completo</div>
+      <h1 class="intro-title">Descubra seu<br><em>Perfil de Transmutação</em></h1>
+      <p class="intro-lead">
+        Um diagnóstico profundo em 6 dimensões — DISC, Jung, Spranger, Estilos de Liderança, Mapa da Transmutação exclusivo e Crenças de Identidade. Leva cerca de <strong>15 minutos</strong>. Resultados instantâneos.
+      </p>
+    </div>
+
+    <div class="intro-grid">
+      <div class="intro-item">
+        <div class="intro-item-icon">⚡</div>
+        <h4>DISC</h4>
+        <p>Comportamento natural em 4 dimensões</p>
+      </div>
+      <div class="intro-item">
+        <div class="intro-item-icon">🌀</div>
+        <h4>Tipos de Jung</h4>
+        <p>Funcionamento psicológico genuíno</p>
+      </div>
+      <div class="intro-item">
+        <div class="intro-item-icon">⚖️</div>
+        <h4>Valores Spranger</h4>
+        <p>Hierarquia dos seus valores reais</p>
+      </div>
+      <div class="intro-item">
+        <div class="intro-item-icon">🏛️</div>
+        <h4>Liderança</h4>
+        <p>Seu estilo natural de liderar</p>
+      </div>
+      <div class="intro-item">
+        <div class="intro-item-icon">🔮</div>
+        <h4>Reprogramação Mental</h4>
+        <p>& Alquimia Espiritual — Exclusivo</p>
+      </div>
+      <div class="intro-item">
+        <div class="intro-item-icon">💎</div>
+        <h4>Crenças</h4>
+        <p>Identidade, capacidade e abundância</p>
+      </div>
+    </div>
+
+    <p class="intro-meta">
+      <span>✓ 66 perguntas</span>
+      <span>✓ ~15 minutos</span>
+      <span>✓ Resultado instantâneo</span>
+      <span>✓ 100% privado</span>
+    </p>
+
+    <div class="btn-row">
+      <button class="btn-accent" onclick="startQuiz()">Iniciar mapeamento →</button>
+      <button class="btn-outline" onclick="loadSaved()">Continuar onde parei</button>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div id="screen-quiz" class="screen">
+  <div class="container">
+    <div class="section-header" id="sectionHeader"></div>
+    <div id="questionsArea"></div>
+    <div class="error-bar" id="errorBar">◈ Responda todas as perguntas desta seção antes de continuar.</div>
+    <div class="quiz-nav">
+      <button class="btn-outline" id="btnBack" onclick="prevSection()">← Voltar</button>
+      <span class="quiz-counter" id="quizCounter">Seção 1 de 7</span>
+      <button class="btn-primary" id="btnNext" onclick="nextSection()">Próxima seção →</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div id="screen-results" class="screen">
+  <div class="results-hero">
+    <div class="container">
+      <p class="eyebrow">◈ Análise completa</p>
+      <h1>Seu Perfil Comportamental</h1>
+      <p>Baseado nas suas respostas · <span id="resultDate"></span></p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="results-stack" id="resultsStack"></div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════
+// DATA
+// ════════════════════════════════
+const SECTIONS = [
+  {
+    id:'disc', eyebrow:'DISC — Marston (1928)', icon:'⚡',
+    title:'Comportamento Natural',
+    desc:'Responda com base em como você realmente se comporta — não como gostaria de ser, mas como age naturalmente.',
+    type:'c4',
+    questions:[
+      { t:'Quando precisa tomar uma decisão importante, você...', o:['Decide rápido e age — mesmo sem todas as informações','Conversa com várias pessoas e busca o apoio do grupo','Pesa cada aspecto com cuidado antes de se posicionar','Analisa dados e cria critérios sólidos antes de decidir'] },
+      { t:'Numa situação de conflito, você tende a...', o:['Confrontar diretamente e resolver logo','Usar empatia e leveza para aliviar a tensão','Ouvir todos os lados e buscar consenso','Identificar onde estão os erros e apontar com dados'] },
+      { t:'As pessoas que convivem com você te descrevem como...', o:['Firme, direto e orientado a resultado','Inspirador, caloroso e cheio de energia','Calmo, paciente e fácil de trabalhar','Detalhista, criterioso e altamente confiável'] },
+      { t:'Quando um projeto atrasa, você...', o:['Cobra o responsável e traça novo plano imediatamente','Motiva as pessoas e reacende o entusiasmo coletivo','Mantém a calma, suporta o time e reorganiza os processos','Revisa tudo, identifica a causa raiz e documenta'] },
+      { t:'Seu maior desconforto profissional é...', o:['Perder o controle ou ser dominado por outros','Ser ignorado ou perder a aprovação do grupo','Mudanças bruscas que quebram a rotina e os processos','Errar por falta de informação ou análise insuficiente'] },
+      { t:'Seu ponto forte que todos reconhecem é...', o:['Capacidade de agir e decidir com rapidez','Comunicação e capacidade de inspirar pessoas','Constância, lealdade e suporte genuíno','Precisão, análise e qualidade consistente'] },
+      { t:'Quando precisa comunicar uma ideia, você...', o:['Apresenta com convicção e força, direto ao ponto','Usa histórias, emoção e conexão pessoal','Mostra como vai funcionar na prática, passo a passo','Apresenta dados, evidências e análise detalhada'] },
+      { t:'Seu ritmo natural de trabalho é...', o:['Alta velocidade, múltiplos projetos em paralelo','Variado, com muita interação e novidades constantes','Estável, previsível, com processos e rotinas claros','Sistemático, com tempo suficiente para análise e revisão'] },
+      { t:'Quando comete um erro, você...', o:['Assume, corrige e segue em frente imediatamente','Fica incomodado com a imagem que transmitiu','Sente muito — preocupa-se com o impacto nas relações','Investiga a fundo o que saiu errado para não repetir'] },
+      { t:'Como você prefere receber um feedback?', o:['Direto, rápido e focado no que precisa melhorar','De forma encorajadora, reconhecendo o que foi bem','Com cuidado, em particular e com tempo para processar','Com dados e exemplos específicos que justifiquem cada ponto'] },
+      { t:'Numa equipe, você naturalmente prioriza...', o:['Resultados e metas acima de tudo','Engajamento, moral e motivação das pessoas','Coesão, harmonia e estabilidade do grupo','Processos corretos, qualidade e padrões definidos'] },
+      { t:'Você se reconhece mais em...', o:['"Fazer acontecer — rápido e com impacto real"','"Inspirar e conectar pessoas em torno de um propósito"','"Ser a âncora que mantém tudo funcionando"','"Garantir que cada detalhe esteja correto"'] }
+    ]
+  },
+  {
+    id:'jung', eyebrow:'Tipos Psicológicos — Jung', icon:'🌀',
+    title:'Tipo Psicológico',
+    desc:'Em cada par, escolha a opção que mais descreve seu modo natural de ser — não o ideal, mas o genuíno.',
+    type:'c2',
+    questions:[
+      { t:'Eu recarrego minha energia...', o:['Em grupos, eventos e conversas — pessoas me energizam','Em silêncio e momentos solo — preciso de quietude para restaurar'] },
+      { t:'Quando processo uma decisão, costumo...', o:['Pensar em voz alta — as ideias surgem enquanto falo','Processar internamente primeiro — só falo com clareza formada'] },
+      { t:'Em termos de relacionamentos, prefiro...', o:['Muitas conexões variadas — tenho energia para novas pessoas','Poucas amizades profundas — qualidade acima de quantidade'] },
+      { t:'Em situações de grupo, prefiro...', o:['Participar ao vivo — o calor da troca me inspira e energiza','Processar antes — receber a pauta e pensar com antecedência'] },
+      { t:'Ao analisar um problema, confio mais em...', o:['Dados concretos, experiências passadas e fatos verificáveis','Intuição, padrões ocultos e possibilidades ainda não mapeadas'] },
+      { t:'Meu foco natural está...', o:['No presente — o que é, o que existe e está provado agora','No futuro — o que pode ser, cenários e possibilidades novas'] },
+      { t:'Ao receber uma instrução, prefiro...', o:['Instruções claras, precisas e detalhadas — sei exatamente o que fazer','Entender o conceito geral e ter liberdade para adaptar o caminho'] },
+      { t:'Em um projeto, valorizo mais...', o:['A abordagem testada e comprovada — segurança no processo','A inovação e o novo — mesmo sem garantia de resultado'] },
+      { t:'Ao tomar decisões difíceis, priorizo...', o:['Lógica e objetividade — mesmo que a resposta doa','O impacto emocional nas pessoas envolvidas'] },
+      { t:'Ao dar uma crítica, você...', o:['Foca no que precisa melhorar — direto e preciso','Cuida muito de como a pessoa vai receber a mensagem'] },
+      { t:'Para mim, ser justo significa...', o:['Tratar com equidade e clareza — mesmo sendo desconfortável','Considerar o contexto emocional e individual de cada pessoa'] },
+      { t:'Na comunicação, convence mais com...', o:['Argumentos racionais, dados e lógica estruturada','Conexão emocional, histórias e valores compartilhados'] },
+      { t:'Em relação à organização, prefiro...', o:['Tudo planejado com antecedência — detesto surpresas','Deixar espaço para adaptação e oportunidades espontâneas'] },
+      { t:'Em relação a prazos, você...', o:['Entrega sempre no dia — prazo é compromisso sagrado','Funciona melhor com a pressão próxima ao limite'] },
+      { t:'O que te dá mais bem-estar?', o:['Dia estruturado, tarefas concluídas, lista cumprida','Espontaneidade, liberdade e flexibilidade de percurso'] },
+      { t:'Você prefere...', o:['Fechar as questões com clareza e seguir em frente','Manter opções abertas o máximo possível — o contexto pode mudar'] }
+    ]
+  },
+  {
+    id:'spranger', eyebrow:'Hierarquia de Valores — Spranger', icon:'⚖️',
+    title:'Valores Reais',
+    desc:'Avalie cada afirmação de 1 (discordo totalmente) a 5 (concordo totalmente) com sinceridade. Não há respostas certas ou erradas.',
+    type:'likert',
+    questions:[
+      { t:'Buscar conhecimento e entender profundamente como as coisas funcionam é algo central para mim.', dim:'Teórico' },
+      { t:'Prefiro saber o porquê das coisas antes de agir — teoria e compreensão antes da prática.', dim:'Teórico' },
+      { t:'Avalio minhas decisões principalmente pelo retorno prático que trazem — resultado concreto é o critério.', dim:'Econômico' },
+      { t:'Resultado financeiro e crescimento patrimonial são um dos meus principais motivadores.', dim:'Econômico' },
+      { t:'A estética, a harmonia visual e a qualidade de forma importam muito para mim.', dim:'Estético' },
+      { t:'Valorizo a expressão criativa e a beleza nos projetos — como algo é apresentado importa tanto quanto o conteúdo.', dim:'Estético' },
+      { t:'Me realizo profundamente quando posso ajudar e impactar pessoas de forma direta.', dim:'Social' },
+      { t:'Servir a outros e contribuir para o bem coletivo guia decisões importantes da minha vida.', dim:'Social' },
+      { t:'Influenciar decisões e ter poder de impacto em organizações é muito importante para mim.', dim:'Político' },
+      { t:'Conquistar posições de liderança e reconhecimento profissional é um motivador real e legítimo.', dim:'Político' },
+      { t:'Busco um propósito maior para além dos resultados materiais — algo que transcende o sucesso comum.', dim:'Transcendente' },
+      { t:'A espiritualidade, o significado profundo da vida ou a conexão com algo maior me move genuinamente.', dim:'Transcendente' }
+    ]
+  },
+  {
+    id:'leadership', eyebrow:'Hersey & Blanchard — Liderança Situacional', icon:'🏛️',
+    title:'Estilo de Liderança',
+    desc:'Escolha a opção que melhor descreve como você naturalmente age como líder — não o que seria ideal, mas o que é real.',
+    type:'c4',
+    questions:[
+      { t:'Com uma pessoa nova e sem experiência, você...', o:['Dá instruções claras e acompanha de perto cada passo','Ensina, explica e dá bastante feedback técnico','Pergunta como ela está se sentindo e oferece suporte emocional','Dá autonomia e confia que ela vai descobrir o caminho'] },
+      { t:'Com alguém experiente mas desmotivado, você...', o:['Cobra mais resultado e define metas claras e firmes','Conversa, entende o que está acontecendo e reorienta','Escuta com atenção, reconhece conquistas e fortalece a confiança','Dá um projeto desafiador com total autonomia'] },
+      { t:'Em crise, você naturalmente...', o:['Assume o comando, define o plano e lidera a execução','Reúne o grupo para encontrar soluções juntos','Mantém o grupo unido e garante suporte emocional','Delega para quem sabe mais sobre o problema específico'] },
+      { t:'Você acredita que líderes devem, acima de tudo...', o:['Definir com clareza o que esperam de cada pessoa','Desenvolver cada pessoa para seu próximo nível','Criar um ambiente seguro para crescer e errar','Confiar no time e deixar as pessoas brilharem com autonomia'] },
+      { t:'Quando um resultado não veio, você primeiro...', o:['Analisa o que falhou no processo e corrige imediatamente','Conversa com cada pessoa sobre o que aprender com o erro','Garante que o grupo não se sinta culpado ou desmotivado','Devolve a responsabilidade para quem estava à frente'] },
+      { t:'Para você, a melhor equipe é aquela que...', o:['Executa com precisão o que foi definido','Está em constante crescimento e aprendizado coletivo','Trabalha com harmonia, confiança e colaboração genuína','É autônoma e não precisa de supervisão constante'] },
+      { t:'As pessoas diriam que você é um líder...', o:['Claro, firme e totalmente orientado a resultado','Coach, parceiro genuíno de desenvolvimento','Humano, próximo, acessível e sempre disponível','Confiante, que dá espaço real para as pessoas crescerem'] },
+      { t:'Na tomada de decisão, você...', o:['Decide, comunica e cobra execução','Decide depois de ouvir e discutir com o grupo','Busca consenso para que todos se sintam parte','Delega a decisão para quem está mais perto do problema'] }
+    ]
+  },
+  {
+    id:'transmutation', eyebrow:'O Legado de Hermes — Exclusivo', icon:'🔮',
+    title:'Reprogramação Mental & Alquimia Espiritual',
+    desc:'Avalie de 1 (raramente/nunca) a 5 (frequentemente/sempre). Este é seu diagnóstico honesto — quanto mais verdadeiro, mais preciso o mapa.',
+    type:'likert',
+    questions:[
+      { t:'Sinto que existe uma versão mais plena de mim que ainda não se manifestou completamente.', dim:'Potencial' },
+      { t:'Carrego padrões emocionais ou comportamentais que reconheço que precisam mudar.', dim:'Padrões' },
+      { t:'Já tentei mudar por outros caminhos, mas os resultados foram temporários ou superficiais.', dim:'Histórico' },
+      { t:'Percebo bloqueios invisíveis que me impedem de avançar mesmo quando tenho clareza do que fazer.', dim:'Bloqueios' },
+      { t:'A espiritualidade ou o autoconhecimento profundo fazem parte da minha jornada de transformação.', dim:'Abertura' },
+      { t:'Sinto que meus padrões têm origem em experiências antigas que ainda influenciam meu presente.', dim:'Raízes' },
+      { t:'Estou aberto a trabalhar com o inconsciente para liberar padrões limitantes de uma vez por todas.', dim:'Prontidão' },
+      { t:'Acredito que a transformação verdadeira vai além do comportamento — envolve identidade e essência.', dim:'Profundidade' }
+    ]
+  },
+  {
+    id:'beliefs', eyebrow:'Autoliderança — Crenças de Identidade', icon:'🧩',
+    title:'Crenças de Identidade',
+    desc:'Avalie de 1 (discordo totalmente) a 5 (concordo totalmente). Responda o que é real hoje, não o que deseja que fosse.',
+    type:'likert',
+    questions:[
+      { t:'Acredito que sou capaz de resolver qualquer desafio que apareça na minha vida.', dim:'Capacidade' },
+      { t:'Mereço plenamente os resultados que estou buscando — sem culpa e sem autopunição.', dim:'Merecimento' },
+      { t:'Sou a versão de mim que minha família e meus compromissos precisam — agora, não no futuro.', dim:'Identidade' },
+      { t:'Consigo ter alto desempenho sem sacrificar minha saúde e minhas relações pessoais.', dim:'Equilíbrio' },
+      { t:'Posso ser firme e forte externamente e ainda me vulnerabilizar — sem contradição.', dim:'Integridade' },
+      { t:'Minha identidade e autoestima independem dos meus resultados externos.', dim:'Autoestima' }
+    ]
+  },
+  {
+    id:'abundance', eyebrow:'Crenças Financeiras — Abundância', icon:'💎',
+    title:'Abundância e Merecimento',
+    desc:'Avalie de 1 (discordo totalmente) a 5 (concordo totalmente). Este é seu mapa de crenças sobre prosperidade.',
+    type:'likert',
+    questions:[
+      { t:'Acredito genuinamente que dinheiro e abundância estão disponíveis e acessíveis para mim.', dim:'Disponibilidade' },
+      { t:'Mereço cobrar o que meu trabalho e minha expertise realmente valem — sem culpa ou hesitação.', dim:'Valor' },
+      { t:'Meu sucesso financeiro pode crescer continuamente sem comprometer minha integridade ou meus valores.', dim:'Expansão' },
+      { t:'Quando penso em riqueza e prosperidade, a primeira emoção que sinto é de possibilidade — não de culpa ou medo.', dim:'Emoção base' }
+    ]
+  }
+];
+
+const KEYS = ['disc','jung','spranger','leadership','transmutation','beliefs','abundance'];
+
+const DISC_INFO = {
+  D:{ name:'Dominante',  color:'#C0392B', desc:'Orientado a resultado, decisivo e direto. Alta tolerância ao risco, age rapidamente. Pode ser percebido como impaciente, mas seu instinto de movimento é um ativo poderoso.' },
+  I:{ name:'Influente',  color:'#B8963E', desc:'Inspira, conecta e energiza pessoas. Otimista, comunicativo e carismático. Sua capacidade de engajar é um diferencial estratégico raro.' },
+  S:{ name:'Estável',    color:'#27AE60', desc:'A âncora do grupo — confiável, consistente e colaborativo. Prefere ambientes previsíveis e relacionamentos profundos. Sua lealdade constrói vínculos sólidos.' },
+  C:{ name:'Criterioso', color:'#9B8EC4', desc:'Garante qualidade, analisa com profundidade e minimiza erros. Sistemático e preciso. Suas entregas têm alto padrão de confiabilidade.' }
+};
+
+const LEADERSHIP_INFO = {
+  0:{ name:'Diretivo',        icon:'⚡', desc:'Você lidera com clareza e firmeza, definindo expectativas e cobrando resultados. Forte em situações de pressão e com pessoas iniciantes que precisam de direção clara.' },
+  1:{ name:'Treinador (Coach)',icon:'🎓', desc:'Você desenvolve pessoas, orientando e dando feedback constante. Forte no crescimento individual e na formação de novos líderes.' },
+  2:{ name:'Apoiador',        icon:'🤝', desc:'Você constrói relações, cria ambiente seguro e apoia emocionalmente. Forte na coesão, no engajamento e na retenção de vínculos genuínos.' },
+  3:{ name:'Delegador',       icon:'🚀', desc:'Você confia no grupo, delega com autonomia e foca em visão e metas. Forte com pessoas experientes que operam com alta autonomia.' }
+};
+
+const JUNG_DESC = {
+  INTJ:'O Arquiteto — Visionário estratégico que combina intuição com análise rigorosa. Independente, determinado, com padrões elevados e orientado ao longo prazo.',
+  INTP:'O Lógico — Inovador intelectual que ama teorias e possibilidades. Analítico, objetivo e curioso. Prefere entender profundamente antes de agir.',
+  ENTJ:'O Comandante — Líder nato que identifica ineficiências e organiza o caminho para a solução. Assertivo, estratégico e orientado a resultado.',
+  ENTP:'O Debatedor — Inovador ágil que desafia o status quo. Engenhoso, expressivo e energizado por desafios intelectuais.',
+  INFJ:'O Visionário — Idealista com visão de longo prazo. Principista, decisivo e apaixonado por causar impacto significativo em pessoas.',
+  INFP:'O Mediador — Idealista criativo que busca autenticidade acima de tudo. Empático, reflexivo e fiel aos seus valores mais profundos.',
+  ENFJ:'O Protagonista — Líder carismático e inspirador. Altruísta, confiável e genuinamente orientado a desenvolver o potencial das pessoas.',
+  ENFP:'O Ativista — Espírito criativo e curioso, sempre buscando conexões profundas. Energético, otimista e motivado por propósito.',
+  ISTJ:'O Logístico — Executor confiável, detalhista e metódico. Comprometido com responsabilidades, processos e valores.',
+  ISFJ:'O Defensor — Dedicado e cuidadoso, sempre presente para quem importa. Confiável, observador e orientado a servir.',
+  ESTJ:'O Executivo — Administrador excelente, focado em ordem, processos e resultados. Direto, honesto e determinado.',
+  ESFJ:'O Cônsul — Sociável, altruísta e atento às necessidades dos outros. Constrói harmonia e senso de pertencimento.',
+  ISTP:'O Virtuoso — Observador analítico e prático. Aprende com a experiência direta. Reservado mas extremamente eficiente.',
+  ISFP:'O Aventureiro — Sensível, flexível e com forte senso estético. Vive o presente com intensidade e autenticidade.',
+  ESTP:'O Empreendedor — Perspicaz e energético. Age primeiro e processa depois. Excelente em resolver situações com agilidade.',
+  ESFP:'O Animador — Espontâneo, dinâmico e entusiasta. Conecta pessoas e cria ambientes de alta energia e engajamento.'
+};
+
+// ════════════════════════════════
+// STATE
+// ════════════════════════════════
+let state = {
+  section: 0,
+  answers: {
+    disc:          new Array(12).fill(null),
+    jung:          new Array(16).fill(null),
+    spranger:      new Array(12).fill(null),
+    leadership:    new Array(8).fill(null),
+    transmutation: new Array(8).fill(null),
+    beliefs:       new Array(6).fill(null),
+    abundance:     new Array(4).fill(null)
+  }
+};
+
+// ════════════════════════════════
+// NAVIGATION
+// ════════════════════════════════
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + id).classList.add('active');
+}
+
+function startQuiz() {
+  state.section = 0;
+  show('quiz');
+  showProgress(true);
+  render();
+}
+
+function loadSaved() {
+  const raw = localStorage.getItem('hermes_perfil');
+  if (!raw) { alert('Nenhum progresso salvo encontrado. Iniciando do começo.'); startQuiz(); return; }
+  try { state = JSON.parse(raw); show('quiz'); showProgress(true); render(); }
+  catch(e) { startQuiz(); }
+}
+
+function showProgress(on) {
+  document.getElementById('headerProgress').style.display = on ? 'block' : 'none';
+}
+
+function setProgress(pct) {
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('headerProgress').textContent = pct + '%';
+}
+
+function save() { localStorage.setItem('hermes_perfil', JSON.stringify(state)); }
+
+function nextSection() {
+  const key = KEYS[state.section];
+  if (state.answers[key].some(a => a === null)) {
+    const bar = document.getElementById('errorBar');
+    bar.style.display = 'block';
+    bar.scrollIntoView({ behavior:'smooth', block:'nearest' });
+    return;
+  }
+  document.getElementById('errorBar').style.display = 'none';
+  save();
+  if (state.section < SECTIONS.length - 1) {
+    state.section++;
+    render();
+    window.scrollTo({ top:0, behavior:'smooth' });
+  } else {
+    buildResults();
+  }
+}
+
+function prevSection() {
+  if (state.section > 0) {
+    state.section--;
+    render();
+    window.scrollTo({ top:0, behavior:'smooth' });
+  } else {
+    show('intro');
+  }
+}
+
+// ════════════════════════════════
+// RENDER
+// ════════════════════════════════
+function render() {
+  const sec = SECTIONS[state.section];
+  const key = KEYS[state.section];
+  const total = SECTIONS.length;
+
+  document.getElementById('sectionHeader').innerHTML = `
+    <div class="section-eyebrow">${sec.icon} ${sec.eyebrow}</div>
+    <h2 class="section-title">${sec.title}</h2>
+    <p class="section-desc">${sec.desc}</p>
+  `;
+  document.getElementById('quizCounter').textContent = `Seção ${state.section + 1} de ${total}`;
+  document.getElementById('btnBack').style.display = state.section === 0 ? 'none' : '';
+  document.getElementById('btnNext').textContent = state.section === total - 1 ? 'Ver meu perfil →' : 'Próxima seção →';
+  document.getElementById('errorBar').style.display = 'none';
+  setProgress(Math.round((state.section / total) * 100));
+
+  const area = document.getElementById('questionsArea');
+  area.innerHTML = '';
+  if (sec.type === 'c4' || sec.type === 'c2') {
+    renderChoice(sec, key, area);
+  } else {
+    renderLikert(sec, key, area);
+  }
+}
+
+function renderChoice(sec, key, area) {
+  const letters = sec.type === 'c2' ? ['A','B'] : ['A','B','C','D'];
+  sec.questions.forEach((q, qi) => {
+    const sel = state.answers[key][qi];
+    const block = document.createElement('div');
+    block.className = 'q-block';
+    block.innerHTML = `
+      <p class="q-text"><span class="q-num">${qi+1}.</span> ${q.t}</p>
+      <div class="options">
+        ${q.o.map((opt,oi) => `
+          <div class="opt${sel===oi?' selected':''}" onclick="pick('${key}',${qi},${oi})">
+            <div class="opt-letter">${letters[oi]}</div>
+            <div class="opt-text">${opt}</div>
+          </div>`).join('')}
+      </div>
+    `;
+    area.appendChild(block);
+    if (qi < sec.questions.length - 1) {
+      const hr = document.createElement('hr'); hr.className = 'q-divider'; area.appendChild(hr);
+    }
+  });
+}
+
+function renderLikert(sec, key, area) {
+  sec.questions.forEach((q, qi) => {
+    const sel = state.answers[key][qi];
+    const item = document.createElement('div');
+    item.className = 'q-block';
+    item.innerHTML = `
+      <p class="likert-q"><span class="q-num">${qi+1}.</span> ${q.t} <span class="likert-dim">${q.dim}</span></p>
+      <div class="likert-row">
+        ${[1,2,3,4,5].map(v=>`<button class="likert-btn${sel===v?' selected':''}" onclick="pick('${key}',${qi},${v})">${v}</button>`).join('')}
+      </div>
+      <div class="likert-labels"><span>Discordo totalmente</span><span>Concordo totalmente</span></div>
+    `;
+    area.appendChild(item);
+    if (qi < sec.questions.length - 1) {
+      const hr = document.createElement('hr'); hr.className = 'q-divider'; area.appendChild(hr);
+    }
+  });
+}
+
+// ════════════════════════════════
+// PICK
+// ════════════════════════════════
+function pick(key, qi, val) {
+  state.answers[key][qi] = val;
+  document.getElementById('errorBar').style.display = 'none';
+  const area = document.getElementById('questionsArea');
+  const block = area.querySelectorAll('.q-block')[qi];
+  const isLikert = typeof val === 'number' && val >= 1 && val <= 5 && SECTIONS[state.section].type === 'likert';
+  if (isLikert) {
+    block.querySelectorAll('.likert-btn').forEach((b,i) => b.classList.toggle('selected', i+1 === val));
+  } else {
+    block.querySelectorAll('.opt').forEach((opt,i) => opt.classList.toggle('selected', i === val));
+  }
+}
+
+// ════════════════════════════════
+// CALCULATIONS
+// ════════════════════════════════
+function calcDISC() {
+  const s = {D:0,I:0,S:0,C:0};
+  const m = ['D','I','S','C'];
+  state.answers.disc.forEach(a => { if (a !== null) s[m[a]]++; });
+  return s;
+}
+
+function calcJung() {
+  const pairs = [
+    {a:'E',b:'I',label:'Extroversão / Introversão'},
+    {a:'S',b:'N',label:'Sensação / Intuição'},
+    {a:'T',b:'F',label:'Pensamento / Sentimento'},
+    {a:'J',b:'P',label:'Julgamento / Percepção'}
+  ];
+  return pairs.map((p, i) => {
+    const slice = state.answers.jung.slice(i*4, i*4+4);
+    const aCount = slice.filter(x => x === 0).length;
+    const bCount = 4 - aCount;
+    return { ...p, winner: aCount >= bCount ? p.a : p.b, aScore: aCount, bScore: bCount };
+  });
+}
+
+function calcSpranger() {
+  const acc = {};
+  SECTIONS[2].questions.forEach((q,i) => {
+    const v = state.answers.spranger[i] || 0;
+    acc[q.dim] = (acc[q.dim] || 0) + v;
+  });
+  return Object.entries(acc).map(([name,score]) => ({name, score, max:10})).sort((a,b) => b.score - a.score);
+}
+
+function calcLeadership() {
+  const s = [0,0,0,0];
+  state.answers.leadership.forEach(a => { if (a !== null) s[a]++; });
+  const primary = s.indexOf(Math.max(...s));
+  const total = s.reduce((a,b) => a+b, 0);
+  return { scores: s, primary, total, info: LEADERSHIP_INFO[primary] };
+}
+
+function calcTransmutation() {
+  const sum = state.answers.transmutation.reduce((a,v) => a + (v||0), 0);
+  const pct = Math.round((sum / 40) * 100);
+  let level, desc, color;
+  if (pct <= 30) {
+    level='Latente'; color='#27AE60';
+    desc='O processo de autoconhecimento está no início. Há potencial de transformação que ainda não foi totalmente ativado. O trabalho com o Legado de Hermes pode revelar camadas ainda inexploradas da sua essência.';
+  } else if (pct <= 55) {
+    level='Emergente'; color='#B8963E';
+    desc='Há padrões identificáveis prontos para serem transmutados. Você já percebe os bloqueios — a alquimia interna está pedindo atenção. O acompanhamento exclusivo pode acelerar enormemente esse processo.';
+  } else if (pct <= 75) {
+    level='Significativa'; color='#9B8EC4';
+    desc='Os padrões inconscientes têm impacto real e a transformação está pronta para acontecer. Seu inconsciente já sinalizou que chegou o momento. A hipnoterapia e a alquimia emocional têm alto potencial de resultado neste estágio.';
+  } else {
+    level='Urgente'; color='#6B3FA0';
+    desc='O inconsciente está pedindo atenção de forma intensa. Este é o momento da grande transmutação — o chumbo está pronto para virar ouro. O acompanhamento exclusivo com Diego & Aline foi criado especificamente para este estágio.';
+  }
+  return { sum, pct, level, color, desc };
+}
+
+function calcBeliefs() {
+  const b = state.answers.beliefs;
+  const ab = state.answers.abundance;
+  return {
+    capacidade:  { score:(b[0]||0)+(b[3]||0), max:10, label:'Crença em Capacidade' },
+    merecimento: { score:(b[1]||0)+(b[5]||0), max:10, label:'Senso de Merecimento' },
+    identidade:  { score:(b[2]||0)+(b[4]||0), max:10, label:'Identidade Essencial' },
+    abundancia:  { score:ab.reduce((s,v)=>s+(v||0),0), max:20, label:'Mentalidade de Abundância' }
+  };
+}
+
+// ════════════════════════════════
+// BUILD RESULTS
+// ════════════════════════════════
+function buildResults() {
+  setProgress(100);
+  show('results');
+  localStorage.removeItem('hermes_perfil');
+
+  document.getElementById('resultDate').textContent =
+    new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+
+  const disc          = calcDISC();
+  const jung          = calcJung();
+  const spranger      = calcSpranger();
+  const leadership    = calcLeadership();
+  const transmutation = calcTransmutation();
+  const beliefs       = calcBeliefs();
+
+  const jungType   = jung.map(d => d.winner).join('');
+  const discTotal  = Object.values(disc).reduce((a,b)=>a+b,0);
+  const discPrimary = Object.entries(disc).sort((a,b)=>b[1]-a[1])[0][0];
+  const jungDesc   = JUNG_DESC[jungType] || `Tipo ${jungType} — perfil único com características multifacetadas.`;
+
+  const stack = document.getElementById('resultsStack');
+  stack.innerHTML = '';
+
+  // 1. DISC
+  stack.innerHTML += `
+    <div class="r-card">
+      <div class="r-card-head">
+        <div class="r-icon">⚡</div>
+        <div><div class="r-title">Perfil DISC</div><div class="r-sub">Comportamento natural — Marston (1928)</div></div>
+        <div class="r-tag">${DISC_INFO[discPrimary].name}</div>
+      </div>
+      <div class="score-row">
+        ${['D','I','S','C'].map(l => {
+          const pct = Math.round(((disc[l]||0)/discTotal)*100);
+          return `
+            <div class="score-item">
+              <div class="s-label" style="color:${DISC_INFO[l].color}">${l}</div>
+              <div class="s-track"><div class="s-fill" style="width:${pct}%;background:${DISC_INFO[l].color}"></div></div>
+              <div class="s-pct">${pct}%</div>
+            </div>`;
+        }).join('')}
+      </div>
+      <div class="profile-box">
+        <strong>Perfil primário: ${discPrimary} — ${DISC_INFO[discPrimary].name}</strong>
+        <p>${DISC_INFO[discPrimary].desc}</p>
+      </div>
+    </div>
+  `;
+
+  // 2. Jung
+  stack.innerHTML += `
+    <div class="r-card">
+      <div class="r-card-head">
+        <div class="r-icon">🌀</div>
+        <div><div class="r-title">Tipo Psicológico</div><div class="r-sub">Jung — 16 tipos</div></div>
+        <div class="r-tag">${jungType}</div>
+      </div>
+      <div class="jung-type">${jungType}</div>
+      <div class="jung-name">${jungDesc.split('—')[0].trim()}</div>
+      <p class="jung-desc">${jungDesc}</p>
+      <div class="jung-dims">
+        ${jung.map((d,idx) => {
+          const labels = [['Extrovertido','Introvertido'],['Sensação','Intuição'],['Pensamento','Sentimento'],['Julgamento','Percepção']];
+          const winScore = d.winner === d.a ? d.aScore : d.bScore;
+          const winLabel = d.winner === d.a ? labels[idx][0] : labels[idx][1];
+          return `
+            <div class="jung-dim">
+              <div class="jung-dim-lbl">${d.label}</div>
+              <div class="jung-dim-val">${d.winner} — ${winLabel} (${winScore}/4)</div>
+            </div>`;
+        }).join('')}
+      </div>
+    </div>
+  `;
+
+  // 3. Spranger
+  stack.innerHTML += `
+    <div class="r-card">
+      <div class="r-card-head">
+        <div class="r-icon">⚖️</div>
+        <div><div class="r-title">Hierarquia de Valores</div><div class="r-sub">Spranger — seus valores reais</div></div>
+      </div>
+      <div class="sp-list">
+        ${spranger.map((v,i) => `
+          <div class="sp-item">
+            <div class="sp-rank">${i+1}°</div>
+            <div class="sp-name">${v.name}</div>
+            <div class="sp-track"><div class="sp-fill" style="width:${(v.score/v.max)*100}%"></div></div>
+            <div class="sp-score">${v.score}/10</div>
+          </div>`).join('')}
+      </div>
+    </div>
+  `;
+
+  // 4. Leadership
+  const lNames = ['Diretivo','Treinador','Apoiador','Delegador'];
+  stack.innerHTML += `
+    <div class="r-card">
+      <div class="r-card-head">
+        <div class="r-icon">${leadership.info.icon}</div>
+        <div><div class="r-title">Estilo de Liderança</div><div class="r-sub">Hersey & Blanchard — Liderança Situacional</div></div>
+        <div class="r-tag">${leadership.info.name}</div>
+      </div>
+      <div class="score-row" style="margin-bottom:14px;">
+        ${leadership.scores.map((s,i) => {
+          const pct = Math.round((s / leadership.total) * 100);
+          return `
+            <div class="score-item wide">
+              <div class="s-label muted">${lNames[i]}</div>
+              <div class="s-track"><div class="s-fill" style="width:${pct}%;background:var(--accent)"></div></div>
+              <div class="s-pct">${pct}%</div>
+            </div>`;
+        }).join('')}
+      </div>
+      <div class="profile-box">
+        <strong>${leadership.info.icon} ${leadership.info.name}</strong>
+        <p>${leadership.info.desc}</p>
+      </div>
+    </div>
+  `;
+
+  // 5. Transmutation
+  stack.innerHTML += `
+    <div class="r-card">
+      <div class="r-card-head">
+        <div class="r-icon">🔮</div>
+        <div><div class="r-title">Reprogramação Mental & Alquimia Espiritual</div><div class="r-sub">Exclusivo — O Legado de Hermes</div></div>
+        <div class="r-tag" style="color:${transmutation.color};background:${transmutation.color}18;border-color:${transmutation.color}40">${transmutation.level}</div>
+      </div>
+      <div class="anx-center">
+        <div class="anx-num" style="color:${transmutation.color}">${transmutation.pct}%</div>
+        <div class="anx-lbl">Nível: <strong>${transmutation.level}</strong></div>
+      </div>
+      <div class="anx-bar-track">
+        <div class="anx-bar-fill" style="width:${transmutation.pct}%;background:linear-gradient(90deg,var(--accent),var(--purple))"></div>
+      </div>
+      <p class="anx-desc">${transmutation.desc}</p>
+    </div>
+  `;
+
+  // 6. Beliefs
+  const bArr = Object.values(beliefs);
+  const weakest = [...bArr].sort((a,b) => (a.score/a.max)-(b.score/b.max))[0];
+  const weakPct = Math.round((weakest.score/weakest.max)*100);
+  stack.innerHTML += `
+    <div class="r-card">
+      <div class="r-card-head">
+        <div class="r-icon">🧩</div>
+        <div><div class="r-title">Crenças e Identidade</div><div class="r-sub">Autoliderança e mentalidade de abundância</div></div>
+      </div>
+      <div class="beliefs-grid">
+        ${bArr.map(b => `
+          <div class="belief-box">
+            <div class="belief-num">${b.score}<span class="belief-max">/${b.max}</span></div>
+            <div class="belief-lbl">${b.label}</div>
+          </div>`).join('')}
+      </div>
+      ${weakPct <= 55 ? `<div class="belief-warning">◈ <strong>${weakest.label}</strong> é sua maior área de desenvolvimento (${weakPct}%). Crenças nessa dimensão têm impacto direto nos seus resultados e na sua transformação.</div>` : ''}
+    </div>
+  `;
+
+  // 7. CTA
+  stack.innerHTML += `
+    <div class="cta-card">
+      <p class="cta-eyebrow">◈ Próximo passo</p>
+      <h2>Seu perfil está <em>mapeado</em>.<br>E agora?</h2>
+      <p>
+        O Legado de Hermes — com Diego & Aline — é um acompanhamento exclusivo que une hipnoterapia, alquimia emocional e espiritualidade para guiar a transmutação verdadeira. Não é gestão de sintomas. É reprogramação de identidade.<br><br>
+        <strong>O caminho para sua nova versão começa agora.</strong> Agende uma conversa gratuita para entender o que o seu mapa revela.
+      </p>
+      <div class="cta-row">
+        <a class="btn-accent" href="https://www.instagram.com/olegadodehermes/" target="_blank">Falar com Diego & Aline →</a>
+        <button class="btn-outline light" onclick="doShare()">Compartilhar resultado</button>
+        <button class="btn-outline light" onclick="window.print()">Salvar como PDF</button>
+      </div>
+    </div>
+  `;
+
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+function doShare() {
+  if (navigator.share) {
+    navigator.share({ title:'Meu Perfil Comportamental — O Legado de Hermes', url: window.location.href });
+  } else {
+    navigator.clipboard.writeText(window.location.href).then(() => alert('Link copiado para a área de transferência.'));
+  }
+}
+</script>
+</body>
+</html>
